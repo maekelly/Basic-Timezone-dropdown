@@ -4,18 +4,30 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style src="src/styles.css"></style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.40/moment-timezone-with-data-1970-2030.min.js"></script>
     <title>Basic Timezone Dropdown</title>
   </head>
   <body>
     <select id="drop-down">
-      <option value="philippines">🇵🇭 Philippines</option>
-      <option value="scotland">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland</option>
-      <option value="uae">🇦🇪 UAE</option>
+      <option value="">Choose a city 📍</option>
+      <option value="Asia/Manila">🇵🇭 Philippines</option>
+      <option value="Europe/London">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scotland</option>
+      <option value="Asia/Dubai">🇦🇪 UAE</option>
     </select>
-    <script src="src/app.js"></script>
+    <script>
+      function popupTime() {
+        if (event.target.value.length > 0) {
+          let zoneSelected = event.target.value;
+          let zoneTime = moment()
+            .tz(`${zoneSelected}`)
+            .format(`dddd Do MMMM YYYY, hh:mm A`);
+          alert(`In the timezone '${zoneSelected}', it is ${zoneTime}`);
+        }
+      }
+
+      let timezonesSelect = document.querySelector(`#drop-down`);
+      timezonesSelect.addEventListener("change", popupTime);
+    </script>
   </body>
 </html>
